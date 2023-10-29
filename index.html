@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie List</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arimo&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+
+    <header>
+      <div class="container">
+        <div class="header__inner">
+          <p class="header__inner_title">Cписок фильмов</p>
+          <p class="header__inner_year">2023</p>
+        </div>
+
+        <h1 class="header__title">Посмотреть</h1>
+      </div>
+    </header>
+
+    <main>
+        <div class="container main__inner">
+
+            <input class="js-new-movie-input movie__input" type="text" placeholder="Добавить фильм">
+
+        <button class="js-addBtn new__movie_btn" type="submit"> 
+            <img src="btn_vector.png" alt="Фото стрелки">
+        </button>
+
+    <div class="movie__list">
+        <ul id="movie__list_items" class="js-list-films movie__list_items">
+          <!-- <li>
+            <button class="movie__list_btn" data-action="clicked"></button>
+            <span class="movie__list_name">Будет название фильма</span>
+            <button class="movie__btn_delete" data-action="delete"></button>
+          </li> -->
+        </ul>
+    </div>
+
+</div>
+    </main>
+
+    <footer>
+      <div class="container"> </div>
+    </footer>
+    <script src="main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,136 @@
+body {
+  font-family: "Arimo", sans-serif;
+  font-weight: 400;
+  background: #181818;
+}
+
+button {
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+}
+
+ul li {
+  padding: 20px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  background-color: #3a3939;
+  border-radius: 10px;
+  position: relative;
+}
+
+footer {
+  margin-top: 10px;
+}
+
+.container {
+  margin: 0 auto;
+  width: 930px;
+  box-sizing: border-box;
+}
+
+.header__inner {
+  display: flex;
+  gap: 20px;
+  padding-top: 80px;
+  margin-left: 74px;
+}
+
+.header__inner_title {
+  color: #f3f6f9;
+  padding: 10px;
+  font-size: 15px;
+  line-height: 17px;
+  border-radius: 200px;
+  border: 1px solid #6532f8;
+  background: #6532f8;
+}
+
+.header__inner_year {
+  color: #f3f6f9;
+  padding: 10px;
+  font-size: 15px;
+  line-height: 17px;
+  border-radius: 200px;
+  border: 1px solid #6532f8;
+  background: #6532f8;
+}
+
+.header__title {
+  margin-bottom: 45px;
+  margin-left: 74px;
+  color: #f3f6f9;
+  font-size: 120px;
+  line-height: 138px;
+}
+
+.new__movie_btn {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background-color: #6532f8;
+}
+
+.movie__list {
+  margin-top: 40px;
+  max-height: 400px;
+  overflow: auto;
+  scroll-behavior: smooth;
+}
+
+.movie__input {
+  width: 411px;
+  margin-right: 20px;
+  padding-left: 5px;
+  padding-bottom: 15px;
+  padding-right: 5px;
+  padding-top: 10px;
+  font-family: Arimo;
+  font-size: 30px;
+  line-height: 34px;
+  color: #f3f6f9;
+  opacity: 0.5;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #f3f6f9;
+  background-color: transparent;
+}
+
+.movie__list_name {
+  color: #f3f6f9;
+  position: absolute;
+  left: 60px;
+}
+
+.movie__list_name_mark {
+  text-decoration: line-through;
+  background-color: #3a3939;
+  opacity: 0.3;
+}
+
+.main__inner {
+  padding: 60px 70px;
+  border-radius: 20px;
+  background: #232323;
+}
+
+.movie__list_btn {
+  height: 19px;
+  width: 19px;
+  border-radius: 50%;
+  background-color: #f3f6f9;
+  opacity: 0.3;
+}
+
+.movie__list_btn_clicked {
+  background-color: #6532f8;
+}
+
+.movie__btn_delete {
+  height: 23px;
+  width: 23px;
+  background-image: url(Vector_list_del.png);
+  background-color: transparent;
+}
