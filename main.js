@@ -95,10 +95,10 @@ function markFilm (event) {
 }
 }
 
-// обработчик для удаления фильма
-listFilmsNode.addEventListener('click', deleteFilm);
 // обработчик для добавления фильма
 addBtn.addEventListener('click', addAllDataFilm);
+// обработчик для удаления фильма
+listFilmsNode.addEventListener('click', deleteFilm);
 // обработчик для отметки, зачеркивания фильма
 listFilmsNode.addEventListener('click', markFilm);
 
