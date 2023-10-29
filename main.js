@@ -100,7 +100,7 @@ listFilmsNode.addEventListener('click', deleteFilm);
 // обработчик для добавления фильма
 addBtn.addEventListener('click', addAllDataFilm);
 // обработчик для отметки, зачеркивания фильма
-addBtn.addEventListener('click', markFilm);
+listFilmsNode.addEventListener('click', markFilm);
 
 
 // e.target - элемент, на котором произошло определенное событие, в данном случае - клик
