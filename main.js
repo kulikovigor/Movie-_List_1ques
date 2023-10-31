@@ -1,4 +1,7 @@
-const films = [];
+let films = [];
+
+const FILM_VALIDATION_LIMIT = 100;
+const validationMessage = document.querySelector('.validationMessage'); 
 
 // поле, данные инпута
 const newMovieInputNode = document.querySelector('.js-new-movie-input');
@@ -6,6 +9,12 @@ const newMovieInputNode = document.querySelector('.js-new-movie-input');
 const addBtn = document.querySelector('.js-addBtn');
 // лист список данных(фильмы)
 const listFilmsNode = document.querySelector('.js-list-films');
+
+
+// получение, проверка данных из localStorage, если они там есть
+if (localStorage.getItem('films')) {
+    films = JSON.parse(localStorage.getItem('films'));
+}
 
 
 function addAllDataFilm() {
@@ -22,14 +31,17 @@ function addAllDataFilm() {
     renderFilms();
 
     newMovieInputNode.value = '';
+    newMovieInputNode.focus();
+
+    saveDataLocalStorage();
 };
 
 // получаем нов.фильм от пользователя с id и названием
 function getFilmFromUser () {
-    const title = newMovieInputNode.value;
+    const newFilm = newMovieInputNode.value;
     return {
         id: Date.now(),
-        title: title,
+        title: newFilm,
     };
 }
 
@@ -41,15 +53,14 @@ function addFilm({title, id}) {
     });
 }
 
-function getFilms(){
-    return films;
+function getFilms() {
+    return films
 }
 
 // выводим в список нов.фильм и добавляем элементы в HTML
 function renderFilms () {
     const films = getFilms();
     
-
     let filmsHTML = '';
 
     films.forEach(film => {
@@ -77,12 +88,14 @@ function deleteFilm(event) {
         });
         // удаляем из массива фильм через splice
         films.splice(indexFilm, 1)
+
         // удаляем из разметки HTML
         parentNode.remove()
+        saveDataLocalStorage()
     }
 }
 
-
+// зачеркивание/метка на фильме и замена цвета чекбокса на нем
 function markFilm (event) {
     if (event.target.dataset.action === 'clicked') {
         const parentNode = event.target.closest('li');
@@ -95,13 +108,45 @@ function markFilm (event) {
 }
 }
 
+
+// функция Валидации на проверку длин.названия фильма
+function validation() {
+    const filmLen = newMovieInputNode.value.length;
+
+    if (filmLen > FILM_VALIDATION_LIMIT) {
+        validationMessage.innerText =  
+        `Название фильма больше ${FILM_VALIDATION_LIMIT} символов`
+        validationMessage.classList.remove('validationMessage_hidden');
+        addBtn.setAttribute('disabled', true);
+        addBtn.style.opacity = "0.5";
+    } 
+    else {
+        validationMessage.classList.add("validationMessage_hidden");
+        addBtn.removeAttribute("disabled");
+        addBtn.style.opacity = "1";
+}
+}
+
+function saveDataLocalStorage() {
+    localStorage.setItem('films', JSON.stringify(films))
+}
+
 // обработчик для добавления фильма
 addBtn.addEventListener('click', addAllDataFilm);
 // обработчик для удаления фильма
 listFilmsNode.addEventListener('click', deleteFilm);
 // обработчик для отметки, зачеркивания фильма
 listFilmsNode.addEventListener('click', markFilm);
+// обработчик для проверки валидации на длин. названия фильма
+newMovieInputNode.addEventListener('input', validation);
+
+
+
+// push - добавляет новую информацию,значение к массиву.
+// forEach - Цикл, повторение неск.действий
 
 
 // e.target - элемент, на котором произошло определенное событие, в данном случае - клик
 //closest() - этот метод ищет ближайший родительский элемент по заданному селектору
+// JSON.parse() - превращает строку в обьект
+// JSON.stringify() -  разбирает обьект и превращает его в строку для java скрипта(формат файла передается по сети)
