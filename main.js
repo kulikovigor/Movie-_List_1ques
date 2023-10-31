@@ -11,9 +11,15 @@ const addBtn = document.querySelector('.js-addBtn');
 const listFilmsNode = document.querySelector('.js-list-films');
 
 
-// получение, проверка данных из localStorage, если они там есть
-if (localStorage.getItem('films')) {
-    films = JSON.parse(localStorage.getItem('films'));
+// // получение, проверка данных из localStorage, если они там есть
+// if (localStorage.getItem('films')) {
+//     films = JSON.parse(localStorage.getItem('films'));
+// }
+
+// пробую через Array.isArray но результат такой же
+const filmsFormStorage = JSON.parse(localStorage.getItem('films'));
+if(Array.isArray(filmsFormStorage)) {
+	films = filmsFormStorage;
 }
 
 
