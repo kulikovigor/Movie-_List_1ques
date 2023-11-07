@@ -10,18 +10,7 @@ const addBtn = document.querySelector('.js-addBtn');
 // лист список данных(фильмы)
 const listFilmsNode = document.querySelector('.js-list-films');
 
-
-// // получение, проверка данных из localStorage, если они там есть
-// if (localStorage.getItem('films')) {
-//     films = JSON.parse(localStorage.getItem('films'));
-// }
-
-// пробую через Array.isArray но результат такой же
-const filmsFormStorage = JSON.parse(localStorage.getItem('films'));
-if(Array.isArray(filmsFormStorage)) {
-	films = filmsFormStorage;
-}
-
+loadFilmsFromLocalStorage();
 
 function addAllDataFilm() {
     // проверка значение инпута
@@ -51,11 +40,12 @@ function getFilmFromUser () {
     };
 }
 
-// добавляем, пушим фильм и его id
+// добавляем, пушим фильм и его id и статус
 function addFilm({title, id}) {
     films.push({
         title,
-        id
+        id,
+        checked:false
     });
 }
 
@@ -63,16 +53,19 @@ function getFilms() {
     return films
 }
 
-// выводим в список нов.фильм и добавляем элементы в HTML
+// выводим в список нов.фильм и добавляем элементы в HTML, так же прописываем проверки
 function renderFilms () {
     const films = getFilms();
     
     let filmsHTML = '';
 
     films.forEach(film => {
+        const isCheckedClass = film.checked ? "movie__list_btn_clicked" : "";
+        const isMarkedClass = film.checked ? "movie__list_name_mark" : "";
+
         filmsHTML += `<li id=${film.id}>
-        <button type="button" class="movie__list_btn" data-action="clicked"></button>
-        <span class="movie__list_name">${film.title}</span>
+        <button type="button" class="movie__list_btn ${isCheckedClass}" data-action="clicked"></button>
+        <span class="movie__list_name ${isMarkedClass}">${film.title}</span>
         <button type="button" class="movie__btn_delete" data-action="delete"></button>
       </li>
         `;
@@ -106,13 +99,15 @@ function markFilm (event) {
     if (event.target.dataset.action === 'clicked') {
         const parentNode = event.target.closest('li');
 
-        const filmBtnClicked = parentNode.querySelector('.movie__list_btn');
-        filmBtnClicked.classList.toggle('movie__list_btn_clicked');
+        const filmID = Number(parentNode.id);
+        const film = films.find((f) => f.id === filmID);
 
-        const filmTitleMark = parentNode.querySelector('.movie__list_name')
-        filmTitleMark.classList.toggle('movie__list_name_mark');
-}
-}
+        film.checked = !film.checked; // Инвертируем состояние checked
+
+        renderFilms(); // Перерисовываем список после изменения состояния
+        }
+        saveDataLocalStorage();
+    }
 
 
 // функция Валидации на проверку длин.названия фильма
@@ -133,6 +128,15 @@ function validation() {
 }
 }
 
+// загружаем данные из локального хранилища при загрузке страницы и сохраняем их при каждом обновлении списка фильмов.
+function loadFilmsFromLocalStorage() {
+    const filmsFromStorage = localStorage.getItem("films");
+    if (filmsFromStorage) {
+    films = JSON.parse(filmsFromStorage);
+    renderFilms();
+    }
+}
+
 function saveDataLocalStorage() {
     localStorage.setItem('films', JSON.stringify(films))
 }
@@ -145,6 +149,7 @@ listFilmsNode.addEventListener('click', deleteFilm);
 listFilmsNode.addEventListener('click', markFilm);
 // обработчик для проверки валидации на длин. названия фильма
 newMovieInputNode.addEventListener('input', validation);
+
 
 
 
